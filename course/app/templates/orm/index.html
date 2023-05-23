@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mt-5 justify-content-center">
+  <div class="col-md-8">
+
+    <h2>ORM Practice(One to One) </h2>
+
+    <h4>Place</h4>
+    <table class="table table-bordered table-sm mt-2 text-center">
+        <thead>
+          <tr>
+            <th>SL</th>
+            <th>Place</th>
+            <th>Actions</th>
+          </tr>
+  
+          {% for place in  places%}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ place.name}}</td>
+            <td>
+              <a href="" class="btn btn-sm btn-success">View</a>
+              <a href="" class="btn btn-sm btn-info">Edit</a>
+              <form action="" class="d-inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+       
+        </thead>
+      </table>
+      <h4>Restaurant</h4>
+      <table class="table table-bordered table-sm mt-2 text-center">
+          <thead>
+            <tr>
+              <th>SL</th>
+              <th>Place</th>
+              <th>Serves</th>
+              <th>Actions</th>
+            </tr>
+    
+            {% for restaurant in  restaurants%}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ restaurant.place.name}}</td>
+              <td>
+               
+                <input type="checkbox" readonly 
+                {% if  restaurant.serves_hot_dogs%}
+                checked
+                {% endif %}
+                > Hot Dogs
+                <input type="checkbox" readonly 
+                {% if restaurant.serves_pizza %}
+                checked
+                {% endif %}
+                > Pizza
+              </td>
+              <td>
+                <a href="" class="btn btn-sm btn-success">View</a>
+                <a href="" class="btn btn-sm btn-info">Edit</a>
+                <form action="" class="d-inline">
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+         
+          </thead>
+        </table>
+      <hr>
+      <h4>Waiter</h4>
+      <table class="table table-bordered table-sm mt-2 text-center">
+          <thead>
+            <tr>
+              <th>SL</th>
+              <th>Name</th>
+              <th>Restaurant</th>
+              <th>Actions</th>
+            </tr>
+    
+            {% for waiter in  waiters%}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ waiter.name}}</td>
+              <td>{{ waiter.restaurant.place.name}}</td>
+              <td>
+                <a href="" class="btn btn-sm btn-success">View</a>
+                <a href="" class="btn btn-sm btn-info">Edit</a>
+                <form action="" class="d-inline">
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+         
+          </thead>
+        </table>
+  </div>
+  <div class="col-md-4">
+    <h4>Place</h4>
+    <form action="{% url 'orm:orm' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="flag" id="" value="place">
+      <div class="my-2">
+        <label for="">Place Name</label>
+        <input type="text" class="form-control" name="place">
+      </div>
+      <div class="my-2">
+        <button class="btn btn-sm btn-success">Submit</button>
+      </div>
+    </form>
+
+    <hr>
+    <h4>Restaurant</h4>
+    <form action="{% url 'orm:orm' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="flag" id="" value="restaurant">
+      <div class="my-2">
+        <label for="">Place</label>
+        <select name="place" id="" class="form-control">
+          <option value="">Select Place</option>
+          {% for place in  places %}
+            <option value="{{ place.id }}">{{ place.name }}</option>
+          {% endfor %}
+       
+        </select>
+      </div>
+      <div class="my-2">
+        <button class="btn btn-sm btn-success">Submit</button>
+      </div>
+    </form>
+    <hr>
+    <h4>Waiter</h4>
+    <form action="{% url 'orm:orm' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="flag" id="" value="waiter">
+      <div class="my-2">
+        <label for="">Restaurant</label>
+        <select name="restaurant" id="" class="form-control">
+          <option value="">Select Restaurant</option>
+          {% for restaurant in  restaurants %}
+            <option value="{{ restaurant.pk }}">{{ restaurant.place.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="my-2">
+        <label for="">Waiter Name</label>
+        <input type="text" class="form-control" name="name">
+      </div>
+      <div class="my-2">
+        <button class="btn btn-sm btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+  
+
+{% endblock content %}
