@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import CharField
+
 
 # Create your models here.
 
@@ -7,17 +9,14 @@ class Category(models.Model):
     slug = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
 
-
     def __str__(self):
         return self.name
-    
+
     class Meta:
         db_table = 'ecom_categories'
         managed = True
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
-
-
 
     """
     Fashion & Beauty
@@ -27,14 +26,17 @@ class Category(models.Model):
     Electronics & Accessories
     """
 
+
 class Size(models.Model):
     name = models.CharField(max_length=120)
     slug = models.CharField(max_length=120)
-    
+
+
 class Color(models.Model):
     name = models.CharField(max_length=120)
-    slug = models.CharField(max_length=120)   
-    
+    slug = models.CharField(max_length=120)
+
+
 class Product(models.Model):
     category = models.OneToOneField(
         Category,
@@ -48,7 +50,7 @@ class Product(models.Model):
         Size,
         on_delete=models.CASCADE
     )
-    
+
     name = models.CharField(max_length=120)
     slug = models.CharField(max_length=120)
     price = models.FloatField(default=120)
@@ -56,5 +58,5 @@ class Product(models.Model):
     image = models.CharField(max_length=120)
     description = models.TextField()
 
-    def __str__(self):
+    def __int__(self) -> CharField:
         return self.name
