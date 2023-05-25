@@ -30,12 +30,17 @@ class Category(models.Model):
 class Size(models.Model):
     name = models.CharField(max_length=120)
     slug = models.CharField(max_length=120)
+    
+    def __str__(self) -> CharField:
+        return self.name
 
 
 class Color(models.Model):
     name = models.CharField(max_length=120)
     slug = models.CharField(max_length=120)
-
+    
+    def __str__(self) -> CharField:
+        return self.name
 
 class Product(models.Model):
     category = models.OneToOneField(
@@ -58,5 +63,5 @@ class Product(models.Model):
     image = models.CharField(max_length=120)
     description = models.TextField()
 
-    def __int__(self) -> CharField:
+    def __str__(self) -> CharField:
         return self.name

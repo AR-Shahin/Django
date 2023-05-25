@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'auth/style.css' %}">{% endblock  %}
+
+{% block content %}
+<div class="auth_wrapper">
+    <div class="form_box">
+        <div class="form_heading">
+            <h3>Register Pannel</h3>
+        </div>
+        
+        <form action="" autocomplete="off">
+            {{ register_form.as_p }}
+            <div class="my-2">
+                <div class="btn_box d-flex justify-content-between">
+                    <div>
+                        <a href="{% url 'auth:login' %}" class="btn btn-link auth_btn">Login</a>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-primary">Register</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
