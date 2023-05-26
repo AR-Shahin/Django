@@ -26,26 +26,31 @@ class RegisterForm(forms.Form):
     username = forms.CharField(
         widget= forms.TextInput(
             attrs={
-                "class" : "form-control","type" : "text","placeholder" : "Enter Your Username"
+                "class" : "form-control","type" : "text","placeholder" : "Enter Your Username","value" : "Ars"
             },
         ),
-        label="User Name"
+        label="User Name",
+        required=False
     )
     
     email = forms.CharField(
         widget= forms.EmailInput(
             attrs={
-                "class" : "form-control","type" : "email","placeholder" : "Enter Your Email"
+                "class" : "form-control",
+                "type" : "email",
+                "placeholder" : "Enter Your Email"
             },
         ),
-        label="Email"
+        label="Email",
+        required=False
     )
     
     password = forms.CharField(
         widget= forms.PasswordInput(
             attrs={
-                "class" : "form-control","type" : "password","placeholder" : "Enter Your Password"
+                "class" : "form-control","type" : "password","placeholder" : "Enter Your Password","value" : "password"
             },
         ),
-        label="Password"
+        label="Password",
+        required=False
     )

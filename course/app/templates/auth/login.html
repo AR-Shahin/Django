@@ -10,7 +10,8 @@
             <h3>Login Pannel</h3>
         </div>
         
-        <form action="" autocomplete="off">
+        <form action="{% url 'auth:login' %}" autocomplete="off" method="POST">
+            {% csrf_token %}
             {{ login_form.as_p }}
 
             <div class="my-2">

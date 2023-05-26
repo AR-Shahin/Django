@@ -9,6 +9,9 @@ class User(models.Model):
     password = models.CharField(max_length=120)
     status = models.BooleanField(default=True)
     
+    def __str__(self):
+        return self.username
+    
     class Meta:
         db_table = 'auth_users'
         managed = True

@@ -10,7 +10,8 @@
             <h3>Register Pannel</h3>
         </div>
         
-        <form action="" autocomplete="off">
+        <form action="{% url 'auth:register' %}" autocomplete="off" method="POST">
+            {% csrf_token %}
             {{ register_form.as_p }}
             <div class="my-2">
                 <div class="btn_box d-flex justify-content-between">

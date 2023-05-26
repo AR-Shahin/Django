@@ -5,7 +5,27 @@
 {% block content %}
 <div class="row justify-content-center mt-5">
     <div class="col-md-6">
-       hi, Shahin
+       <h4>Hi, {{ user }}</h4>
+
+       <table class="table table-bordered table-sm">
+        <tr>
+            <th>Name</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>User Name</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+       </table>
+
+       <form action="{% url 'auth:logout' %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-sm btn-success">Logout</button>
+       </form>
     </div>
 </div>
 {% endblock %}
